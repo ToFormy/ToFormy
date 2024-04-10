@@ -181,7 +181,6 @@ const survey_search = ref(null);
 const forms_display_type = ref(localStorage.getItem('forms_display_type') || "Cards");
 const type_switch_active_table = ref((forms_display_type.value === 'Table') ? true : false);
 const search = ref('');
-const name = ref('');
 
 // Arrays
 let forms = ref([])

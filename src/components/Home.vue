@@ -40,7 +40,7 @@
       </v-row>
       <br>
 
-      <v-btn @click="screenButtonInstall" color="error" size="small" v-if="pwaMode === 'browser' && !dialog">
+      <v-btn @click="screenButtonInstall" color="error" size="small" v-if="pwaMode === 'browser' && !installPromotionDialog">
         <v-icon right>mdi-download</v-icon>
         Install APP NOW
       </v-btn>
@@ -53,7 +53,7 @@
 
       <div class="text-center pa-4">
 
-        <v-dialog v-model="dialog" max-width="400" persistent>
+        <v-installPromotionDialog v-model="installPromotionDialog" max-width="400" persistent>
 
 
           <v-card prepend-icon="mdi-download" text="You can install this app on your device." title="Install app?">
@@ -65,7 +65,7 @@
               </v-btn>
 
 
-              <v-btn @click="hideInstallPromotion" color="secundary">
+              <v-btn @click="installPromotionDialog.value = false" color="secundary">
                 Close
               </v-btn>
 
@@ -75,7 +75,7 @@
 
             </template>
           </v-card>
-        </v-dialog>
+        </v-installPromotionDialog>
       </div>
 
       <my-snackbar-component ref="mySnackbar"></my-snackbar-component>
@@ -89,7 +89,8 @@ import { ref, onMounted, defineComponent } from 'vue';
 import MySnackbarComponent from '../components/MySnackbarComponent.vue';
 
 const mySnackbar = ref(defineComponent(MySnackbarComponent));
-const dialog = ref(false);
+const installPromotionDialog = ref(false);
+
 const pwaMode = ref('browser');
 let deferredPrompt = null;
 const keyDontOpenAgain = 'dontOpenAgain';
@@ -105,26 +106,18 @@ function getPWADisplayMode() {
   return 'browser';
 }
 
-const showInstallPromotion = () => {
-  dialog.value = true;
-};
-
-const hideInstallPromotion = () => {
-  dialog.value = false;
-};
-
 const screenButtonInstall = () => {
-  showInstallPromotion();
+  installPromotionDialog.value = true;
 };
 
 const dontOpenAgain = () => {
-  hideInstallPromotion();
+  installPromotionDialog.value = false;
   deferredPrompt = null;
   localStorage.setItem(keyDontOpenAgain, 0);
 };
 
 const buttonInstall = async () => {
-  hideInstallPromotion();
+  installPromotionDialog.value = false;
   if (!deferredPrompt) {
     mySnackbar.value.createSnackbar('Please click on Reload button', 'info', 5000);
     return;
@@ -136,14 +129,14 @@ const buttonInstall = async () => {
   if (outcome === 'accepted') {
     pwaMode.value = getPWADisplayMode();
   }
-  hideInstallPromotion();
+  installPromotionDialog.value = false;
   deferredPrompt = null;
 };
 
 onMounted(() => {
   pwaMode.value = getPWADisplayMode();
   if (['standalone', 'twa'].includes(pwaMode.value)) {
-    hideInstallPromotion();
+    installPromotionDialog.value = false;
     localStorage.setItem(keyDontOpenAgain, 0);
   }
 });
@@ -153,12 +146,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
   if (valueDontOpenAgain == 1) {
-    showInstallPromotion();
+    installPromotionDialog.value = true;
   }
 });
 
 window.addEventListener('appinstalled', () => {
-  hideInstallPromotion();
+  installPromotionDialog.value = false;
   deferredPrompt = null;
 });
 
