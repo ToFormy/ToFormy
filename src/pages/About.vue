@@ -81,7 +81,7 @@ export default {
       author: 'Mário de Araújo Carvalho',
       email: 'mariodearaujocarvalho@gmail.com',
       license: 'MIT',
-      repository: 'https://github.com/MarioCarvalhoBr/ToFormy',
+      repository: 'https://github.com/ToFormy/ToFormy',
       site_deploy: 'https://toformyapp.web.app',
       loading: false,
     };

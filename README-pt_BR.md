@@ -22,7 +22,7 @@ ToFormy é uma aplicação avançada destinada à coleta e gerenciamento de dado
 1. Clone o repositório ToFormy:
 
 ```bash
-git clone https://github.com/MarioCarvalhoBr/ToFormy.git
+git clone https://github.com/ToFormy/ToFormy.git
 cd ToFormy
 ```
 
@@ -56,7 +56,7 @@ ToFormy está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais de
 
 - Autor: Mário de Araújo Carvalho
 - Email: mariodearaujocarvalho@gmail.com
-- Projeto: [https://github.com/MarioCarvalhoBr/ToFormy](https://github.com/MarioCarvalhoBr/ToFormy)
+- Projeto: [https://github.com/ToFormy/ToFormy](https://github.com/ToFormy/ToFormy)
 
 ---
 

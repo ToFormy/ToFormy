@@ -33,7 +33,7 @@ ToFormy is an advanced application aimed at collecting and managing data, ideal 
 1. Clone the ToFormy repository:
 
 ```bash
-git clone https://github.com/MarioCarvalhoBr/ToFormy.git
+git clone https://github.com/ToFormy/ToFormy.git
 cd ToFormy
 ```
 
@@ -96,7 +96,7 @@ ToFormy is under the MIT License. See the [LICENSE](LICENSE) file for more detai
 
 - Author: Mário de Araújo Carvalho
 - Email: mariodearaujocarvalho@gmail.com
-- Project: [https://github.com/MarioCarvalhoBr/ToFormy](https://github.com/MarioCarvalhoBr/ToFormy)
+- Project: [https://github.com/ToFormy/ToFormy](https://github.com/ToFormy/ToFormy)
 
 ---
 
