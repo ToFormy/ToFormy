@@ -8,9 +8,31 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="toggleTheme">
+
+
+
+      <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn icon v-bind="props">
+            <v-icon style="margin-right: 5px;">
+              {{ selectedLanguage === 'en' ? 'mdi-translate' : 'mdi-translate' }}</v-icon> {{ locale }}
+          </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(option, index) in languageOptions"
+          :value="index"
+          :key="option.value" @click="setLanguage(option.value)"
+        >
+          <v-list-item-title>{{ option.text }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+
+    <v-btn icon @click="toggleTheme">
         <v-icon>{{ theme.global.current.value.dark ? 'mdi-white-balance-sunny' : 'mdi-weather-night' }}</v-icon>
       </v-btn>
+
 
     </v-app-bar>
 
@@ -53,6 +75,24 @@
 <script setup>
   import { ref } from 'vue'
   import { useTheme } from 'vuetify'
+
+  import { useI18n } from 'vue-i18n';
+
+  const { locale } = useI18n();
+  const selectedLanguage = ref(localStorage.getItem('preferredLanguage') || 'pt');
+
+  const languageOptions = [
+    { text: 'en_US', value: 'en' },
+    { text: 'pt_BR', value: 'pt' },
+  ];
+
+  const setLanguage = (language) => {
+    selectedLanguage.value = language;
+    locale.value = language;
+    localStorage.setItem('preferredLanguage', language);
+  };
+
+  locale.value = selectedLanguage.value;
 
   const links = [
     // Home page
