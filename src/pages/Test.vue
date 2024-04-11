@@ -34,6 +34,8 @@ import { useI18n } from 'vue-i18n';
 
 const userName = ref('Mário');
 const { locale } = useI18n();
+const { t } = useI18n(); // Usando useI18n para acessar o método t
+
 const selectedLanguage = ref(localStorage.getItem('preferredLanguage') || 'pt');
 
 const languageOptions = [

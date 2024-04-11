@@ -73,7 +73,7 @@
               <strong>{{ $t('message.page_about_label_authors') }}</strong>
             </h3>
             <p align="justify">
-              {{ $t('message.page_about_value_authors') }}
+              {{ myFormatterList.format($tm('message.page_about_value_authors')) }}
             </p>
           </v-list-item>
 
@@ -85,6 +85,7 @@
               {{ $t('message.page_about_value_contact_email') }}
             </p>
           </v-list-item>
+
         </v-list>
       </v-card-text>
     </v-card>
@@ -93,27 +94,20 @@
 
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      loading: false,
-      formatadorLista: new Intl.ListFormat('pt', { style: 'long', type: 'conjunction' }),
-    };
-  },
-  methods: {
-  },
-  watch: {
-    loading(val) {
-      if (!val) return
-      setTimeout(() => {
-        this.loading = false
-        window.location.reload();
+<script setup>
+import { ref, watch } from 'vue';
 
-      }, 2000)
-    },
-  },
-};
+// VARIABLES
+const loading = ref(false);
+const myFormatterList = ref(new Intl.ListFormat('pt', { style: 'long', type: 'conjunction' }));
+
+watch(loading, (val) => {
+  if (!val) return;
+  setTimeout(() => {
+    loading.value = false;
+    window.location.reload();
+  }, 2000);
+});
 </script>
 
 <style scoped></style>
