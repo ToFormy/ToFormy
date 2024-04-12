@@ -129,6 +129,10 @@ const resetSettings = () => {
   localStorage.removeItem('forms_display_type')
   settings.value.forms_display_type.selected = "Cards"
 
+  // Set en as default language
+  console.log("Set en as default language")
+  localStorage.setItem('preferredLanguage', 'en')
+
   // Reload the page
   location.reload()
 }

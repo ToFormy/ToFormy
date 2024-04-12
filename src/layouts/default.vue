@@ -11,7 +11,7 @@
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
-            <v-icon style="margin-right: 5px;">
+            <v-icon style="margin-right: 6px;">
               {{ selectedLanguage === 'en' ? 'mdi-translate' : 'mdi-translate' }}</v-icon> {{ locale }}
           </v-btn>
         </template>
@@ -23,7 +23,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn icon @click="toggleTheme">
+      <v-btn icon @click="toggleTheme" style="margin-left: 6px;">
         <v-icon>{{ theme.global.current.value.dark ? 'mdi-white-balance-sunny' : 'mdi-weather-night' }}</v-icon>
       </v-btn>
 
@@ -68,14 +68,14 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n(); // Usando useI18n para acessar o método t
 
 const { locale } = useI18n();
-const selectedLanguage = ref(localStorage.getItem('preferredLanguage') || 'pt');
+const selectedLanguage = ref(localStorage.getItem('preferredLanguage') || 'en');
 locale.value = selectedLanguage.value;
 const keyTheme = "theme";
 
 // ARRAYS
 const languageOptions = [
-  { text: 'en_US', value: 'en' },
-  { text: 'pt_BR', value: 'pt' },
+  { text: 'English', value: 'en' },
+  { text: 'Português', value: 'pt' },
 ];
 
 const refreshDrawer = () => {

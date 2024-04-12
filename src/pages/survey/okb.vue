@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="d-flex align-center">
-      <h1 class="flex-grow-1">{{ $t('message.page_surveys_label_my_surveys') }}</h1>
-      <v-btn color="primary" size="small" @click="openDialogAddSurvey">{{ $t('message.page_surveys_button_new_survey') }}</v-btn>
+      <h1 class="flex-grow-1">My archived surveys</h1>
     </div>
 
     <!-- My Components -->
@@ -10,13 +9,13 @@
 
     <v-row>
       <v-col v-for="survey in surveys" :key="survey.id" cols="12" md="6" lg="3">
-        <v-card class="elevation-8" color="indigo-darken-4" dark>
-          <v-card-title>{{ survey.data.name }}</v-card-title>
+        <v-card class="elevation-8" color="secondary" dark>
+          <v-card-title>{{ survey.data.name }} </v-card-title>
           <v-card-subtitle>{{ survey.data.description }}</v-card-subtitle>
-          <v-card-text>{{ survey.data.city }}, {{ survey.data.state }}, {{ survey.data.country }}</v-card-text>
+          <v-card-text>{{ survey.data.city }}, {{ survey.data.state }}, {{ survey.data.country}}</v-card-text>
           <div class="">
-            <v-card-subtitle>{{ $t('message.page_surveys_label_updated') }}: {{ new Date(survey.changed).toLocaleDateString("pt-BR") }}</v-card-subtitle>
-            <v-card-subtitle>{{ $t('message.page_surveys_label_created') }}: {{ new Date(survey.created).toLocaleDateString("pt-BR") }}</v-card-subtitle>
+            <v-card-subtitle> Updated: {{ new Date(survey.changed).toLocaleDateString("pt-BR") }}</v-card-subtitle>
+            <v-card-subtitle> Created: {{ new Date(survey.created).toLocaleDateString("pt-BR") }}</v-card-subtitle>
           </div>
           <br>
           <v-divider></v-divider>
@@ -26,8 +25,8 @@
               @click="() => $router.push('/survey/' + survey.code)"></v-btn>
               <v-btn size="small" class="ma-2" color="orange-darken-2" icon="mdi-pencil"
                 @click="openDialogEditSurvey(survey)"></v-btn>
-              <v-btn size="small" class="ma-2" color="grey" icon="mdi-archive"
-                @click="openDialogArchiveSurvey(survey)"></v-btn>
+              <v-btn size="small" class="ma-2" color="yellow-darken-2" icon="mdi-backup-restore"
+                @click="openDialogRecoverySurvey(survey)"></v-btn>
               <v-btn size="small" class="ma-2" color="red-darken-2" icon="mdi-delete"
                 @click="openDialogDeleteSurvey(survey)"></v-btn>
             </v-row>
@@ -45,6 +44,7 @@
     <my-dialog-survey-component ref="myDialogSurvey" @close="closeDialogSurvey"></my-dialog-survey-component>
 
   </div>
+
 </template>
 
 <script setup>
@@ -54,8 +54,6 @@ import { ref, onMounted, defineComponent, onUpdated } from 'vue';
 // Extra libraries
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
-import { useI18n } from 'vue-i18n';
-const { t } = useI18n();
 
 // Components
 import MySnackbarComponent from '../../components/MySnackbarComponent.vue';
@@ -65,7 +63,7 @@ import MyDialogSurveyComponent from '@/components/MyDialogSurveyComponent.vue';
 
 // Imports relativos (de outros arquivos do projeto)
 import surveyJson from '../../model_survey_survey.json';
-import { createSurveyDB, updateSurveyDB, deleteSurveyDB, readAllSurveysDB, setInactiveSurveyDB } from '../../database/surveyDAO';
+import { createSurveyDB, updateSurveyDB, deleteSurveyDB, readAllArchivedSurveysDB, setActiveSurveyDB } from '../../database/surveyDAO';
 
 // SETUP SURVEYJS
 // -----------------------------------------------------------------------------
@@ -86,6 +84,7 @@ const mySnackbar = ref(defineComponent(MySnackbarComponent));
 const myAlert = ref(defineComponent(MyAlertComponent));
 const myDialogDelete = ref(defineComponent(MyDialogComponent));
 const myDialogArchive = ref(defineComponent(MyDialogComponent));
+
 const myDialogSurvey = ref(defineComponent(MyDialogSurveyComponent));
 
 // VARS
@@ -103,7 +102,7 @@ const survey_to_delete = ref(null)
 const openDialogDeleteSurvey = (survey) => {
   console.log('openDialogDeleteSurvey to survey:', JSON.stringify(survey, null, 3));
   survey_to_delete.value = survey;
-  myDialogDelete.value.createDialog(t('message.page_surveys_dialog_title_delete_survey'), t('message.page_surveys_dialog_message_delete_survey'), 'error', 'mdi-delete', { confirm: t('message.page_surveys_button_delete'), cancel: t('message.page_surveys_button_close') }, { confirm: 'red', cancel: 'grey' });
+  myDialogDelete.value.createDialog('Delete survey', `Are you sure you want to delete this survey? This action cannot be undone.`, 'error', 'mdi-delete', { confirm: 'Delete', cancel: 'Close' }, { confirm: 'red', cancel: 'grey' });
 }
 const closeDialogDelete = () => {
   console.log('Closed from MyDialogComponent');
@@ -116,32 +115,21 @@ const confirmDialogDelete = () => {
 
 };
 // ARCHIVE: Functions and methods to utilize the dialog component
-const openDialogArchiveSurvey = (survey) => {
-  console.log('openDialogArchiveSurvey to survey:', JSON.stringify(survey, null, 3));
+const openDialogRecoverySurvey = (survey) => {
+  console.log('openDialogRecoverySurvey to survey:', JSON.stringify(survey, null, 3));
   survey_to_delete.value = survey;
-  myDialogArchive.value.createDialog(t('message.page_surveys_dialog_title_archive_survey'), t('message.page_surveys_dialog_message_archive_survey'), 'warning', 'mdi-archive', { confirm: t('message.page_surveys_button_archive'), cancel: t('message.page_surveys_button_close') }, { confirm: 'orange', cancel: 'grey' });
+  myDialogArchive.value.createDialog('Recovery survey', `Are you sure you want to recovery this survey?`, 'primary', 'mdi-backup-restore', { confirm: 'Recovery', cancel: 'Close' }, { confirm: 'green', cancel: 'grey' });
 }
 const closeDialogArchive = () => {
   console.log('Closed from MyDialogComponent');
 };
 const confirmDialogArchive = () => {
   console.log('Confirmed from MyDialogComponent');
-  moveSurveyToArchive(survey_to_delete);
+  setActiveSurvey(survey_to_delete);
   getAllSurveys();
 };
 
 // SURVEY: Functions and methods to utilize the dialog component
-const openDialogAddSurvey = () => {
-  // Clear the survey
-  surveyModel.clear();
-  surveyModel.mode = 'edit';
-  // Desativar a paginação
-  surveyModel.showProgressBar = 'none';
-  // Edit mode
-  is_edit_survey_dialog.value = false
-
-  myDialogSurvey.value.createDialog(t('message.page_surveys_button_new_survey'), t('message.page_surveys_button_new_survey'), 'primary', 'mdi-plus', surveyModel);
-}
 /*
 const openDialogViewSurvey = (survey) => {
   console.log('View survey:', survey);
@@ -169,7 +157,7 @@ const openDialogEditSurvey = (survey) => {
   surveyModel.showProgressBar = 'bottom';
 
   // Create the dialog
-  myDialogSurvey.value.createDialog(t('message.page_surveys_button_edit_survey'), t('message.page_surveys_button_edit_survey'), 'primary', 'mdi-pencil', surveyModel);
+  myDialogSurvey.value.createDialog('Edit survey', 'Edit survey', 'primary', 'mdi-pencil', surveyModel);
 }
 const closeDialogSurvey = () => {
   console.log('Closed from MyDialogSurveyComponent');
@@ -195,67 +183,63 @@ const createOrUpdateSurvey = async (data) => {
       const id = await createSurveyDB(data);
       idKey = id;
     }
-    let message = is_edit_survey_dialog.value ? t('message.page_surveys_snackbar_survey_updated') : t('message.page_surveys_snackbar_survey_created');
+    let message = `Survey ${is_edit_survey_dialog.value ? 'updated' : 'created'} successfully.`;
 
     mySnackbar.value.createSnackbar(message, color, 3000);
     console.log(message + ` Got id ${idKey}. Survey: ${JSON.stringify(data, null, 3)}`);
 
   } catch (error) {
-    let text = is_edit_survey_dialog.value ? t('message.page_surveys_alert_update_survey_error', { error: error }) : t('message.page_surveys_alert_create_survey_error', { error: error });
-    let color = 'red-darken-4';
-    mySnackbar.value.createSnackbar(text, color, 5000);
+    let text = `Failed to add survey: ${error}`;
+
+    myAlert.value.createAlert('Error', text, 'error', 'mdi-alert');
     console.log(text);
   }
 }
 const deleteSurvey = async (survey) => {
   try {
     await deleteSurveyDB(survey.value);
-    let message = t('message.page_surveys_snackbar_survey_deleted');
+    let message = `Survey deleted successfully.`;
 
     mySnackbar.value.createSnackbar(message, 'red-darken-4', 3000);
     console.log(message + ` Got id ${survey.value.id}. Survey: ${JSON.stringify(survey, null, 3)}`);
   } catch (error) {
-    let text = t('message.page_surveys_alert_delete_survey_error', { error: error });
+    let text = `Failed to delete survey: ${error}.`;
 
-    let color = 'red-darken-4';
-    mySnackbar.value.createSnackbar(text, color, 5000);
+    myAlert.value.createAlert('Error', text, 'error', 'mdi-alert');
     console.log(text + ` Got id ${survey.value.id}. Survey: ${JSON.stringify(survey, null, 3)}`);
   }
 }
-const moveSurveyToArchive = async (survey) => {
+const setActiveSurvey = async (survey) => {
   try {
-    await setInactiveSurveyDB(survey.value.id);
-    let message = t('message.page_surveys_snackbar_survey_archived');
-    mySnackbar.value.createSnackbar(message, 'orange-darken-4', 3000);
+    await setActiveSurveyDB(survey.value.id);
+    let text = `Survey recovered successfully.`;
 
-    console.log(message + ` Got id ${survey.value.id}. Survey: ${JSON.stringify(survey, null, 3)}`);
-  } catch (error) {
-    let text = t('message.page_surveys_alert_archive_survey_error', { error: error });
-
-    let color = 'red-darken-4';
-    mySnackbar.value.createSnackbar(text, color, 5000);
+    mySnackbar.value.createSnackbar(text, 'green', 3000);
     console.log(text + ` Got id ${survey.value.id}. Survey: ${JSON.stringify(survey, null, 3)}`);
+  } catch (error) {
+    let text = `Failed to recover survey: ${error}.`;
+
+    myAlert.value.createAlert('Error', text, 'error', 'mdi-alert');
+    console.log(text);
   }
 }
 const getAllSurveys = async (survey_code) => {
   try {
-    surveys.value = await readAllSurveysDB(survey_code);
+    surveys.value = await readAllArchivedSurveysDB(survey_code);
     surveys.value.sort((a, b) => b.id - a.id);
 
     // Verifica se o surveys está vazio
     if (surveys.value.length === 0) {
-      myAlert.value.createAlert(t('message.page_surveys_alert_no_surveys_found'), t('message.page_surveys_alert_click_new_survey'), 'info', 'mdi-information');
+      myAlert.value.createAlert('No surveys found in archive!', '', 'info', 'mdi-information');
     }else{
       myAlert.value.alert.show = false;
     }
 
     console.log(`Loaded ${surveys.value.length} surveys`);
   } catch (error) {
+    let text = `Failed to load surveys: ${error}`;
 
-    let text = t('message.page_surveys_alert_load_surveys_error', { error: error });
-
-    let color = 'red-darken-4';
-    mySnackbar.value.createSnackbar(text, color, 5000);
+    myAlert.value.createAlert('Error', text, 'error', 'mdi-alert');
     console.log(text);
   }
 }
@@ -269,8 +253,6 @@ onMounted(async () => {
 })
 onUpdated(() => {
   console.log('onUpdated');
-  getAllSurveys();
-
 })
 // -----------------------------------------------------------------------------
 

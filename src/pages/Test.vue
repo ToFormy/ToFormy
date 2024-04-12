@@ -39,8 +39,8 @@ const { t } = useI18n(); // Usando useI18n para acessar o método t
 const selectedLanguage = ref(localStorage.getItem('preferredLanguage') || 'pt');
 
 const languageOptions = [
-  { text: 'en_US', value: 'en' },
-  { text: 'pt_BR', value: 'pt' },
+  { text: 'en', value: 'en' },
+  { text: 'pt', value: 'pt' },
 ];
 
 const setLanguage = (language) => {

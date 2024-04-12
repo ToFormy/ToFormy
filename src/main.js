@@ -16,19 +16,17 @@ import { createI18n } from 'vue-i18n'
 import { surveyPlugin } from "survey-vue3-ui";
 
 // Importando as mensagens de localização
-import enMessages from "./locales/en";
-import ptMessages from "./locales/pt";
-
-const messages = {
-  en: enMessages,
-  pt: ptMessages
-};
+import enMessages from "./locales/en-US";
+import ptMessages from "./locales/pt-BR";
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'pt', // set locale
+  locale: 'en', // set locale
   fallbackLocale: 'en', // set fallback locale
-  messages, // set locale messages
+  messages: {
+    en: enMessages,
+    pt: ptMessages
+  }
 })
 
 const app = createApp(App);
