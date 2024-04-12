@@ -6,6 +6,31 @@ export default {
     app_value_version: '1.0.0',
     app_text_copyrigth: 'All rights reserved 2023-'+ new Date().getFullYear() + '. {app_name}©.',
 
+    // PAGE SETTINGS
+    page_settins_title: 'Settings',
+    page_settings_label_select_material_design_theme: 'Select Material Design theme',
+    page_settings_label_select_theme: 'Select theme',
+    page_settings_label_set_dark_mode_theme: 'Set Dark Mode theme',
+    page_settings_label_set_dark_mode: 'Dark Mode',
+    page_settings_label_select_display_type_for_forms: 'Select the display view type for forms',
+    page_settings_label_select_display_type: 'Select display type',
+    page_settings_label_save_settings: 'Save Settings',
+    page_settings_label_reset_settings: 'Reset Settings',
+    page_settings_text_send_email: 'Hello, I would like to talk to you about the ToFormy app.',
+
+    // SNACKBARS
+    // 'Please click on Reload button'
+    snackbar_page_home_text_click_on_reload_button: 'Please click on Reload button',
+
+    // HOME PAGE
+    page_home_label_wellcome: 'Welcome to',
+    page_home_button_reload: 'Reload',
+    page_home_button_install_app_now: 'Install app now',
+    page_home_dialog_text_install_app_now: 'You can install this app on your device.',
+    page_home_dialog__title_install_app_now: 'Install App?',
+    page_home_dialog_button_dont_show_again: 'Don\'t show again',
+    page_home_dialog_button_close: 'Close',
+    page_home_dialog_button_install: 'Install',
 
     // ABOUT PAGE
     page_about_title: 'About',

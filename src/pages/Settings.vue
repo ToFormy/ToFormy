@@ -1,38 +1,58 @@
 <template>
   <div>
     <div class="d-flex align-center">
-      <h1 class="flex-grow-1">Settings</h1>
+      <h1 class="flex-grow-1">
+        {{ $t('message.page_settins_title') }}
+      </h1>
     </div>
 
+
+
     <v-card class="elevation-2" outlined>
+      <v-card-title>
+
+    <div class="d-flex align-center">
+      <h1 class="flex-grow-1"></h1>
+      <v-btn color="error" size="small" @click="resetSettings()" style="margin-right: 0px;">
+      {{ $t('message.page_settings_label_reset_settings') }}
+      </v-btn>
+    </div>
+      </v-card-title>
       <v-card-text>
         <v-list>
 
           <v-list-item>
-            <v-list-item-title>Select Material Design Theme</v-list-item-title>
-            <v-list-item-subtitle>
+            <h3>
+              {{ $t('message.page_settings_label_select_material_design_theme') }}
+            </h3>
+            <p>
               <v-select v-model="settings.blueprint.selected" :items="settings.blueprint.items"
-                label="Select Material Design Theme"></v-select>
-            </v-list-item-subtitle>
+                :label="$t('message.page_settings_label_select_theme')"></v-select>
+            </p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Set Dark Mode Theme</v-list-item-title>
-            <v-list-item-subtitle>
-              <v-switch v-model="settings.darkmode" label="Dark mode"></v-switch>
-            </v-list-item-subtitle>
+            <h3>
+              {{ $t('message.page_settings_label_set_dark_mode_theme') }}
+            </h3>
+            <p>
+              <v-switch v-model="settings.darkmode" :label="$t('message.page_settings_label_set_dark_mode')">
+              </v-switch>
+            </p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Select Display Type for Forms</v-list-item-title>
-            <v-list-item-subtitle>
+            <h3>
+              {{ $t('message.page_settings_label_select_display_type_for_forms') }}
+            </h3>
+            <p>
               <v-select v-model="settings.forms_display_type.selected" :items="settings.forms_display_type.items"
-                label="Select Display Type for Forms"></v-select>
-            </v-list-item-subtitle>
+                :label="$t('message.page_settings_label_select_display_type')"></v-select>
+            </p>
           </v-list-item>
 
           <v-btn @click="saveSettings()" color="primary" dark large outlined>
-            Save Settings
+            {{ $t('message.page_settings_label_save_settings') }}
           </v-btn>
 
         </v-list>
@@ -88,6 +108,26 @@ const saveSettings = () => {
   // Save forms display settings
   console.log("Save forms display settings")
   localStorage.setItem('forms_display_type', settings.value.forms_display_type.selected)
+
+  // Reload the page
+  location.reload()
+}
+
+const resetSettings = () => {
+  // Reset blueprint theme settings
+  console.log("Reset blueprint theme settings")
+  localStorage.removeItem('blueprint')
+  settings.value.blueprint.selected = "md1"
+
+  // Reset dark mode settings
+  console.log("Reset dark mode settings")
+  localStorage.removeItem('theme')
+  settings.value.darkmode = false
+
+  // Reset forms display settings
+  console.log("Reset forms display settings")
+  localStorage.removeItem('forms_display_type')
+  settings.value.forms_display_type.selected = "Cards"
 
   // Reload the page
   location.reload()
