@@ -1,66 +1,91 @@
 <template>
   <div>
     <div class="d-flex align-center">
-      <h1 class="flex-grow-1">About</h1>
+      <h1 class="flex-grow-1">{{ $t('message.page_about_title') }}</h1>
     </div>
 
-    <v-card class="elevation-12" outlined>
+    <v-card class="elevation-1" outlined>
       <v-card-text>
         <v-list>
           <v-list-item>
-            <v-list-item-title><strong>{{ appName }}</strong></v-list-item-title>
-            <p>
-              {{ appDescription }}
+            <h3><strong>{{ $t('message.app_name') }}</strong></h3>
+            <p align="justify">
+              {{ $t('message.page_about_description') }}
             </p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Check for updates</v-list-item-title>
-            <v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.page_about_label_check_for_updates') }}</strong>
+            </h3>
+            <p>
               <v-btn size="small" color="primary" @click="loading = !loading" :loading="loading">
-                Check for updates
+                {{ $t('message.page_about_button_check_for_updates') }}
 
                 <template v-slot:loader>
                   <v-progress-linear indeterminate></v-progress-linear>
                 </template>
               </v-btn>
-            </v-list-item-subtitle>
+            </p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Hosting Site</v-list-item-title>
-            <v-list-item-subtitle><a :href="site_deploy" target="_blank">{{ site_deploy }}</a></v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.page_about_label_hosting_site') }}</strong>
+            </h3>
+            <p><a :href="$t('message.page_about_link_hosting_site')" target="_blank">{{
+              $t('message.page_about_link_hosting_site') }}</a></p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Version</v-list-item-title>
-            <v-list-item-subtitle>{{ version }}</v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.app_label_version') }}</strong>
+            </h3>
+            <p>{{ $t('message.app_value_version') }}</p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Repository</v-list-item-title>
-            <v-list-item-subtitle><a :href="repository" target="_blank">{{ repository }}</a></v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.page_about_label_repository') }}</strong>
+            </h3>
+            <p>
+              <a :href="$t('message.page_about_link_repository')" target="_blank">{{
+                $t('message.page_about_link_repository')
+                }}</a>
+            </p>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>License</v-list-item-title>
-            <v-list-item-subtitle><a href="https://opensource.org/licenses/MIT" target="_blank">{{ license
-                }}</a></v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.page_about_label_title_license') }}</strong>
+            </h3>
+            <p align="justify">
+              {{ $t("message.page_about_text_license", { app_name: $t('message.app_name') }) }}
+              <a :href="$t('message.page_about_link_license')" target="_blank">{{
+                $t('message.page_about_label_name_license')
+                }}</a>
+            </p>
+
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>Author</v-list-item-title>
-            <v-list-item-subtitle><strong>{{ author }}</strong></v-list-item-subtitle>
+            <h3>
+              <strong>{{ $t('message.page_about_label_authors') }}</strong>
+            </h3>
+            <p align="justify">
+              {{ myFormatterList.format($tm('message.page_about_value_authors')) }}
+            </p>
           </v-list-item>
 
           <v-list-item>
+            <h3>
+              <strong>{{ $t('message.page_about_label_contact_email') }}</strong>
+            </h3>
+            <p align="justify">
+              <a :href="myHref">{{ $t('message.page_about_value_contact_email')}}</a>
 
-            <v-list-item-title>Contact Email</v-list-item-title>
-            <v-list-item-subtitle>
-              <a
-                href="mailto:mariodearaujocarvalho@gmail.com?subject=ToFormy App&body=Hello Mário, I would like to talk to you about the ToFormy application.">{{
-                email }}</a>
-            </v-list-item-subtitle>
+
+            </p>
           </v-list-item>
 
         </v-list>
@@ -71,34 +96,33 @@
 
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      appName: 'ToFormy',
-      appDescription: 'ToFormy is an innovative and robust solution designed to meet the data collection and management needs in various contexts. Ideal for organizations, researchers, and professionals needing an effective tool to gather information, ToFormy offers an intuitive and flexible platform, allowing the creation of custom forms tailored to any specific data collection needs.',
-      version: '1.0.0',
-      author: 'Mário de Araújo Carvalho',
-      email: 'mariodearaujocarvalho@gmail.com',
-      license: 'MIT',
-      repository: 'https://github.com/ToFormy/ToFormy',
-      site_deploy: 'https://toformyapp.web.app',
-      loading: false,
-    };
-  },
-  methods: {
-  },
-  watch: {
-    loading(val) {
-      if (!val) return
-      setTimeout(() => {
-        this.loading = false
-        window.location.reload();
+<script setup>
+import { ref, watch, onUpdated } from 'vue';
+// Import t
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
-      }, 2000)
-    },
-  },
+const getTextHref = () => {
+  return `mailto:${t('message.page_about_value_contact_email')}?subject=${t('message.app_name')} App&body=${t('message.page_settings_text_send_email')}`;
 };
+const myHref = ref(getTextHref());
+
+// VARIABLES
+const loading = ref(false);
+const myFormatterList = ref(new Intl.ListFormat('pt', { style: 'long', type: 'conjunction' }));
+
+watch(loading, (val) => {
+  if (!val) return;
+  setTimeout(() => {
+    loading.value = false;
+    window.location.reload();
+  }, 2000);
+});
+
+onUpdated(() => {
+  myHref.value = getTextHref();
+});
+
 </script>
 
 <style scoped></style>
