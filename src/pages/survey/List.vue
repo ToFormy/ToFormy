@@ -1,8 +1,11 @@
 <template>
   <div>
+
     <div class="d-flex align-center">
       <h1 class="flex-grow-1">{{ $t('message.page_surveys_label_my_surveys') }}</h1>
-      <v-btn color="primary" size="small" @click="openDialogAddSurvey">{{ $t('message.page_surveys_button_new_survey') }}</v-btn>
+    </div>
+    <div class="button-container">
+      <v-btn color="primary" size="small" @click="openDialogAddSurvey" style="margin-bottom: 10px;">{{ $t('message.page_surveys_button_new_survey') }}</v-btn>
     </div>
 
     <!-- My Components -->

@@ -128,7 +128,7 @@ const dontOpenAgain = () => {
 const buttonInstall = async () => {
   hideInstallPromotion();
   if (!deferredPrompt) {
-    mySnackbar.value.createSnackbar(t('message.snackbar_page_home_text_click_on_reload_button'), 'info', 5000);
+    mySnackbar.value.createSnackbar(t('message.page_home_snackbar_text_click_on_reload_button'), 'info', 5000);
     return;
   }
 

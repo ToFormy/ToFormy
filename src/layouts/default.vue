@@ -74,8 +74,8 @@ const keyTheme = "theme";
 
 // ARRAYS
 const languageOptions = [
-  { text: 'English', value: 'en' },
-  { text: 'Português', value: 'pt' },
+  { text: 'English (en_US)', value: 'en' },
+  { text: 'Português (pt_BR)', value: 'pt' },
 ];
 
 const refreshDrawer = () => {
