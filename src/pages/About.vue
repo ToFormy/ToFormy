@@ -88,6 +88,21 @@
             </p>
           </v-list-item>
 
+          <v-list-item>
+            <h3>
+              <strong>{{ $t('message.page_about_label_support') }}: </strong>
+            </h3>
+            <div class="button-container-center">
+              <div class="ma-1">
+                <v-img :aspect-ratio="1" src="@/assets/logo.png" width="150"></v-img>
+              </div>
+
+              <div class="ma-1">
+                <v-img :aspect-ratio="1" src="@/assets/logo.png" width="150"></v-img>
+              </div>
+            </div>
+          </v-list-item>
+
         </v-list>
       </v-card-text>
     </v-card>

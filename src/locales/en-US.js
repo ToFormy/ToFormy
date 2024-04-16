@@ -161,6 +161,8 @@ export default {
     page_about_value_authors: ['Mário de Araújo Carvalho'],
     page_about_label_contact_email: 'Contact e-mail',
     page_about_value_contact_email: "mariodearaujocarvalho{'@'}gmail.com",
+    page_about_label_support: 'Partners',
+
     // ---------------------------------------------------------------------------------------------------------------------
 
     // ---------------------------------------------------------------------------------------------------------------------
