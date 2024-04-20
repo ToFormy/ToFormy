@@ -1,37 +1,4 @@
 <template>
-  <!--
-    Strins do i8n:
-    // PAGE ARCHIVED SURVEYS LIST
-    page_archived_surveys_label_my_archived_surveys: 'My archived surveys',
-    page_archived_surveys_label_updated: 'Updated',
-    page_archived_surveys_label_created: 'Created',
-    // Alert messages
-    page_archived_surveys_alert_no_surveys_found: 'No surveys found in archive!',
-    // Snackbar messages
-    page_archived_surveys_snackbar_survey_recovered: 'Survey recovered successfully.',
-    page_archived_surveys_snackbar_survey_deleted: 'Survey deleted successfully.',
-    page_archived_surveys_snackbar_survey_updated: 'Survey updated successfully.',
-    page_archived_surveys_snackbar_error_recover: 'Failed to recover survey: {error}',
-    page_archived_surveys_snackbar_error_load: 'Failed to load surveys: {error}',
-    page_archived_surveys_snackbar_error_delete: 'Failed to delete survey: {error}',
-    // Dialog titles and messages
-    page_archived_surveys_dialog_title_delete_survey: 'Delete survey',
-    page_archived_surveys_dialog_title_recover_survey: 'Recover survey',
-    page_archived_surveys_dialog_title_edit_survey: 'Edit survey',
-    page_archived_surveys_dialog_confirm_delete: 'Are you sure you want to delete this survey? This action cannot be undone.',
-    page_archived_surveys_dialog_confirm_recover: 'Are you sure you want to recover this survey?',
-    // Buttons
-    page_archived_surveys_button_new_survey: 'New Survey',
-    page_archived_surveys_button_edit_survey: 'Edit Survey',
-    page_archived_surveys_button_dont_show_again: "Don't Show Again",
-    page_archived_surveys_button_close: 'Close',
-    page_archived_surveys_button_install: 'Install',
-    page_archived_surveys_button_edit: 'Edit',
-    page_archived_surveys_button_archive: 'Archive',
-    page_archived_surveys_button_recovery: 'Recover',
-    page_archived_surveys_button_delete: 'Delete',
-    Use sempre: message.string...
-  -->
   <div>
     <div class="d-flex align-center">
       <h1 class="flex-grow-1">
@@ -192,6 +159,12 @@ const openDialogEditSurvey = (survey) => {
   surveyModel.data = survey.data;
   surveyModel.mode = 'edit';
   surveyModel.showProgressBar = 'bottom';
+
+  // Setup SurveyJS label texts
+  surveyModel.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  surveyModel.pageNextText = t('message.my_surveyjs_page_next_text');
+  surveyModel.completeText = t('message.my_surveyjs_complete_text');
+  surveyModel.completedHtml = t('message.my_surveyjs_response_default');
 
   // Create the dialog
   myDialogSurvey.value.createDialog(t('message.page_archived_surveys_dialog_title_edit_survey'), t('message.page_archived_surveys_dialog_title_edit_survey'), 'primary', 'mdi-pencil', surveyModel);

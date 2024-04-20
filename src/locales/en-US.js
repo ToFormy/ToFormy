@@ -1,10 +1,27 @@
+import packageJson from '/package.json'
+
 export default {
   message: {
     // App strings
-    app_name: 'ToFormy',
+    app_name: packageJson.name,
+    app_value_version: packageJson.version,
     app_label_version: 'Version',
-    app_value_version: '1.0.0',
     app_text_copyrigth: 'All rights reserved 2023-'+ new Date().getFullYear() + '. {app_name}©.',
+
+    // MY DIALOGS
+    my_dialog_button_close: 'Close',
+    my_dialog_button_cancel: 'Cancel',
+    my_dialog_button_confirm: 'Confirm',
+    my_dialog_button_ok: 'OK',
+
+    // MY SURVEYJS
+    my_surveyjs_page_prev_text: "Previous",
+    my_surveyjs_page_next_text: "Next",
+    my_surveyjs_complete_text: "Save",
+    my_surveyjs_response_default: "Response registered",
+
+    // MY COMPONENTS
+    my_components_dialog_label_required_field: '* Indicates required field',
 
     // ---------------------------------------------------------------------------------------------------------------------
     // PAGE SURVEY CODE

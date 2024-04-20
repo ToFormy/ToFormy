@@ -142,6 +142,12 @@ const openDialogAddSurvey = () => {
   surveyModel.showProgressBar = 'none';
   // Edit mode
   is_edit_survey_dialog.value = false
+  // Setup SurveyJS label texts
+  surveyModel.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  surveyModel.pageNextText = t('message.my_surveyjs_page_next_text');
+  surveyModel.completeText = t('message.my_surveyjs_complete_text');
+  surveyModel.completedHtml = t('message.my_surveyjs_response_default');
+
 
   myDialogSurvey.value.createDialog(t('message.page_surveys_button_new_survey'), t('message.page_surveys_button_new_survey'), 'primary', 'mdi-plus', surveyModel);
 }
@@ -170,6 +176,12 @@ const openDialogEditSurvey = (survey) => {
   surveyModel.data = survey.data;
   surveyModel.mode = 'edit';
   surveyModel.showProgressBar = 'bottom';
+
+  // Setup SurveyJS label texts
+  surveyModel.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  surveyModel.pageNextText = t('message.my_surveyjs_page_next_text');
+  surveyModel.completeText = t('message.my_surveyjs_complete_text');
+  surveyModel.completedHtml = t('message.my_surveyjs_response_default');
 
   // Create the dialog
   myDialogSurvey.value.createDialog(t('message.page_surveys_button_edit_survey'), t('message.page_surveys_button_edit_survey'), 'primary', 'mdi-pencil', surveyModel);

@@ -1,45 +1,4 @@
 <template>
-  <!--
-    Variáveis para usar no i8n $t('message.page_survey_code_xxxx')
-
-    // ---------------------------------------------------------------------------------------------------------------------
-    // PAGE SURVEY CODE
-    // Page Survey Code Labels
-    page_survey_code_label_title: "My Forms",
-    page_survey_code_label_all_forms: "All Forms",
-    page_survey_code_label_active_table: "Active Table",
-    // Page Survey Code Buttons
-    page_survey_code_button_new_form: "New Form",
-    page_survey_code_button_export_csv: ".CSV",
-    page_survey_code_button_export_xlsx: ".XLSX",
-    // Page Survey Code Dialog Titles and Options
-    page_survey_code_dialog_view_form: "View form",
-    page_survey_code_dialog_edit_form: "Edit form",
-    page_survey_code_dialog_copy_form: "Copy form",
-    page_survey_code_dialog_delete_form: "Delete form",
-    page_survey_code_dialog_new_form: "New form",
-    // Page Survey Code Snackbar Messages
-    page_survey_code_snackbar_form_created: "Form created successfully.",
-    page_survey_code_snackbar_form_updated: "Form updated successfully.",
-    page_survey_code_snackbar_form_deleted: "Form deleted successfully.",
-    // Page Survey Code Alert Messages
-    page_survey_code_alert_no_forms_found: "No forms found",
-    page_survey_code_alert_error: "Error",
-    // Page Survey Code Dialog Confirmations
-    page_survey_code_dialog_confirm_delete: "Are you sure you want to delete this form? This action cannot be undone.",
-    page_survey_code_dialog_confirm_copy: "Are you sure you want to copy this form?",
-    page_survey_code_dialog_confirm_edit: "Are you sure you want to edit this form?",
-    // Page Survey Code Snackbar Errors (Template for Errors)
-    page_survey_code_snackbar_error_create: "Failed to create form: {error}",
-    page_survey_code_snackbar_error_update: "Failed to update form: {error}",
-    page_survey_code_snackbar_error_delete: "Failed to delete form: {error}",
-    page_survey_code_snackbar_error_load: "Failed to load forms: {error}",
-    // Miscellaneous
-    page_survey_code_label_search_forms: "Search forms",
-    page_survey_code_menu_options: "OPTIONS",
-    // ---------------------------------------------------------------------------------------------------------------------
-
-  -->
   <div>
     <div class="d-flex align-center">
       <h1 class="flex-grow-1">{{ $t('message.page_survey_code_label_title') }}</h1>
@@ -161,7 +120,6 @@
     </v-row>
     <!-- YOUR DATA HERE -->
 
-
     <!-- My Components -->
     <my-snackbar-component ref="mySnackbar"></my-snackbar-component>
     <my-dialog-component ref="myDialogDelete" @confirm="confirmDialogDelete"
@@ -230,7 +188,7 @@ const search = ref('');
 
 // Arrays
 let forms = ref([])
-let data_objects = ref(null)
+let data_objects = ref([])
 const form_to_edit = ref(null)
 const form_to_delete = ref(null)
 // -----------------------------------------------------------------------------
@@ -249,6 +207,12 @@ const openDialogCopyForm = (form) => {
   survey.mode = 'edit';
   survey.showProgressBar = 'bottom';
 
+  // Setup SurveyJS label texts
+  survey.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  survey.pageNextText = t('message.my_surveyjs_page_next_text');
+  survey.completeText = t('message.my_surveyjs_complete_text');
+  survey.completedHtml = t('message.my_surveyjs_response_default');
+
   // Create the dialog
   myDialogSurvey.value.createDialog(t('message.page_survey_code_dialog_copy_form'), t('message.page_survey_code_dialog_copy_form'), 'primary', 'mdi-pencil', survey);
 }
@@ -256,7 +220,7 @@ const openDialogCopyForm = (form) => {
 const openDialogDeleteForm = (form) => {
   console.log('openDialogDeleteForm to form:', JSON.stringify(form, null, 3));
   form_to_delete.value = form;
-  myDialogDelete.value.createDialog(t('message.page_survey_code_dialog_delete_form'), t('message.page_survey_code_dialog_confirm_delete'), 'error', 'mdi-delete', { confirm: 'Delete', cancel: 'Close' }, { confirm: 'red', cancel: 'black' });
+  myDialogDelete.value.createDialog(t('message.page_survey_code_dialog_delete_form'), t('message.page_survey_code_dialog_confirm_delete'), 'error', 'mdi-delete', { confirm: t('message.page_surveys_button_delete'), cancel: t('message.page_surveys_button_close') }, { confirm: 'red', cancel: 'black' });
 }
 const closeDialogDelete = () => {
   console.log('Closed from MyDialogComponent');
@@ -274,6 +238,11 @@ const openDialogAddForm = () => {
   survey.showProgressBar = 'bottom';
   // Edit mode
   is_edit_form_dialog.value = false
+  // Setup SurveyJS label texts
+  survey.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  survey.pageNextText = t('message.my_surveyjs_page_next_text');
+  survey.completeText = t('message.my_surveyjs_complete_text');
+  survey.completedHtml = t('message.my_surveyjs_response_default');
 
   myDialogSurvey.value.createDialog(t('message.page_survey_code_dialog_new_form'), t('message.page_survey_code_dialog_new_form'), 'primary', 'mdi-plus', survey);
 }
@@ -285,6 +254,11 @@ const openDialogViewForm = (form) => {
   survey.mode = 'display';
   // View mode
   is_edit_form_dialog.value = false
+  // Setup SurveyJS label texts
+  survey.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  survey.pageNextText = t('message.my_surveyjs_page_next_text');
+  survey.completeText = t('message.my_surveyjs_complete_text');
+  survey.completedHtml = t('message.my_surveyjs_response_default');
 
   myDialogSurvey.value.createDialog(t('message.page_survey_code_dialog_view_form'), t('message.page_survey_code_dialog_view_form'), 'primary', 'mdi-eye', survey);
 }
@@ -300,6 +274,12 @@ const openDialogEditForm = (form) => {
   survey.data = form.data;
   survey.mode = 'edit';
   survey.showProgressBar = 'bottom';
+
+  // Setup SurveyJS label texts
+  survey.pagePrevText = t('message.my_surveyjs_page_prev_text');
+  survey.pageNextText = t('message.my_surveyjs_page_next_text');
+  survey.completeText = t('message.my_surveyjs_complete_text');
+  survey.completedHtml = t('message.my_surveyjs_response_default');
 
   // Create the dialog
   myDialogSurvey.value.createDialog(t('message.page_survey_code_dialog_edit_form'), t('message.page_survey_code_dialog_edit_form'), 'primary', 'mdi-pencil', survey);
@@ -368,16 +348,16 @@ const getAllForms = async (survey_code) => {
     forms.value = await readAllFormsDB(survey_code);
     forms.value.sort((a, b) => b.id - a.id);
 
+    data_objects.value = [];
+
     // Verifica se o forms está vazio
     if (forms.value.length === 0) {
       myAlert.value.createAlert(t('message.page_survey_code_alert_no_forms_found'), t('message.page_survey_code_alert_click_new_survey'), 'info', 'mdi-information');
-      data_objects.value = [];
-
     } else {
+      // Hide the alert
       myAlert.value.alert.show = false;
 
-      data_objects.value = [];
-
+      // Setup data_objects
       forms.value.forEach((form) => {
         data_objects.value.push({
           // Active Actions
