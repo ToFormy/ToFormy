@@ -153,7 +153,7 @@ export default {
 
     // ABOUT PAGE
     page_about_title: 'Sobre',
-    page_about_description: 'O ToFormy é uma solução inovadora e robusta projetada para atender às necessidades de coleta e gerenciamento de dados em diversos contextos. Ideal para organizações, pesquisadores e profissionais que precisam de uma ferramenta eficaz para coletar informações, o ToFormy oferece uma plataforma intuitiva e flexível, permitindo a criação de formulários personalizados para atender a qualquer necessidade específica de coleta de dados.',
+    page_about_description: 'O ' + packageJson.name+ ' é uma solução inovadora e robusta projetada para atender às necessidades de coleta e gerenciamento de dados em diversos contextos. Ideal para organizações, pesquisadores e profissionais que precisam de uma ferramenta eficaz para coletar informações, o ' + packageJson.name + ' oferece uma plataforma intuitiva e flexível, permitindo a criação de formulários personalizados para atender a qualquer necessidade específica de coleta de dados.',
     page_about_label_check_for_updates: 'Verificar atualizações',
     page_about_button_check_for_updates: 'Atualizar',
     page_about_label_hosting_site: 'Site de Hospedagem',

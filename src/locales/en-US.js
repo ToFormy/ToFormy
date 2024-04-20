@@ -144,7 +144,7 @@ export default {
     page_settings_label_select_display_type: 'Select display type',
     page_settings_label_save_settings: 'Save Settings',
     page_settings_label_reset_settings: 'Reset Settings',
-    page_settings_text_send_email: 'Hello, I would like to talk to you about the ToFormy app.',
+    page_settings_text_send_email: 'Hello, I would like to talk to you about the ' + packageJson.name + ' app. I have some suggestions and would like to know more about the app. Can we talk?',
     // ---------------------------------------------------------------------------------------------------------------------
 
     // ---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ export default {
     // ---------------------------------------------------------------------------------------------------------------------
     // ABOUT PAGE
     page_about_title: 'About',
-    page_about_description: 'ToFormy is an innovative and robust solution designed to meet the data collection and management needs in various contexts. Ideal for organizations, researchers, and professionals needing an effective tool to gather information, ToFormy offers an intuitive and flexible platform, allowing the creation of custom forms tailored to any specific data collection needs.',
+    page_about_description: 'The ' + packageJson.name + ' is an innovative and robust solution designed to meet the needs of data collection and management in various contexts. Ideal for organizations, researchers, and professionals who need an effective tool to collect information, the ' + packageJson.name + ' offers an intuitive and flexible platform, allowing the creation of custom forms to meet any specific data collection need.',
     page_about_label_check_for_updates: 'Check for updates',
     page_about_button_check_for_updates: 'Update',
     page_about_label_hosting_site: 'Hosting Site',
