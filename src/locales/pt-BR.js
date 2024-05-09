@@ -1,10 +1,27 @@
+import packageJson from '/package.json'
+
 export default {
   message: {
     // App strings
-    app_name: 'ToFormy',
+    app_name: packageJson.name,
+    app_value_version: packageJson.version,
     app_label_version: 'Versão',
-    app_value_version: '1.0.0',
     app_text_copyrigth: 'Todos os direitos reservados 2023-' + new Date().getFullYear() + '. {app_name}©.',
+
+    // MY DIALOGS
+    my_dialog_button_close: 'Fechar',
+    my_dialog_button_cancel: 'Cancelar',
+    my_dialog_button_confirm: 'Confirmar',
+    my_dialog_button_ok: 'OK',
+
+    // MY SURVEYJS
+    my_surveyjs_page_prev_text: "Anterior",
+    my_surveyjs_page_next_text: "Próximo",
+    my_surveyjs_complete_text: "Salvar",
+    my_surveyjs_response_default: "Resposta registrada",
+
+    // MY COMPONENTS
+    my_components_dialog_label_required_field: '* Indica campo obrigatório',
 
     // ---------------------------------------------------------------------------------------------------------------------
     // CÓDIGO DA PÁGINA DE FORMULÁRIOS
@@ -136,7 +153,7 @@ export default {
 
     // ABOUT PAGE
     page_about_title: 'Sobre',
-    page_about_description: 'O ToFormy é uma solução inovadora e robusta projetada para atender às necessidades de coleta e gerenciamento de dados em diversos contextos. Ideal para organizações, pesquisadores e profissionais que precisam de uma ferramenta eficaz para coletar informações, o ToFormy oferece uma plataforma intuitiva e flexível, permitindo a criação de formulários personalizados para atender a qualquer necessidade específica de coleta de dados.',
+    page_about_description: 'O ' + packageJson.name+ ' é uma solução inovadora e robusta projetada para atender às necessidades de coleta e gerenciamento de dados em diversos contextos. Ideal para organizações, pesquisadores e profissionais que precisam de uma ferramenta eficaz para coletar informações, o ' + packageJson.name + ' oferece uma plataforma intuitiva e flexível, permitindo a criação de formulários personalizados para atender a qualquer necessidade específica de coleta de dados.',
     page_about_label_check_for_updates: 'Verificar atualizações',
     page_about_button_check_for_updates: 'Atualizar',
     page_about_label_hosting_site: 'Site de Hospedagem',
@@ -151,6 +168,7 @@ export default {
     page_about_value_authors: ['Mário de Araújo Carvalho'],
     page_about_label_contact_email: 'E-mail de Contato',
     page_about_value_contact_email: "mariodearaujocarvalho{'@'}gmail.com",
+    page_about_label_support: 'Apoio',
 
     //MENU DRAWER NAVIGATION
     menu_drawer_label_home: 'Tela Inicial',

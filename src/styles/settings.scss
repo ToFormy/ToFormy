@@ -17,3 +17,18 @@
     gap: 10px;
     /* Distância entre os botões */
   }
+
+
+// Class to be used in the main container of the application
+.button-container-center {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.fixed-bar-my-custom {
+  position: sticky;
+  position: -webkit-sticky; /* for Safari */
+  top: 6em;
+  z-index: 2;
+}

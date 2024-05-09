@@ -1,10 +1,27 @@
+import packageJson from '/package.json'
+
 export default {
   message: {
     // App strings
-    app_name: 'ToFormy',
+    app_name: packageJson.name,
+    app_value_version: packageJson.version,
     app_label_version: 'Version',
-    app_value_version: '1.0.0',
     app_text_copyrigth: 'All rights reserved 2023-'+ new Date().getFullYear() + '. {app_name}©.',
+
+    // MY DIALOGS
+    my_dialog_button_close: 'Close',
+    my_dialog_button_cancel: 'Cancel',
+    my_dialog_button_confirm: 'Confirm',
+    my_dialog_button_ok: 'OK',
+
+    // MY SURVEYJS
+    my_surveyjs_page_prev_text: "Previous",
+    my_surveyjs_page_next_text: "Next",
+    my_surveyjs_complete_text: "Save",
+    my_surveyjs_response_default: "Response registered",
+
+    // MY COMPONENTS
+    my_components_dialog_label_required_field: '* Indicates required field',
 
     // ---------------------------------------------------------------------------------------------------------------------
     // PAGE SURVEY CODE
@@ -127,7 +144,7 @@ export default {
     page_settings_label_select_display_type: 'Select display type',
     page_settings_label_save_settings: 'Save Settings',
     page_settings_label_reset_settings: 'Reset Settings',
-    page_settings_text_send_email: 'Hello, I would like to talk to you about the ToFormy app.',
+    page_settings_text_send_email: 'Hello, I would like to talk to you about the ' + packageJson.name + ' app. I have some suggestions and would like to know more about the app. Can we talk?',
     // ---------------------------------------------------------------------------------------------------------------------
 
     // ---------------------------------------------------------------------------------------------------------------------
@@ -146,7 +163,7 @@ export default {
     // ---------------------------------------------------------------------------------------------------------------------
     // ABOUT PAGE
     page_about_title: 'About',
-    page_about_description: 'ToFormy is an innovative and robust solution designed to meet the data collection and management needs in various contexts. Ideal for organizations, researchers, and professionals needing an effective tool to gather information, ToFormy offers an intuitive and flexible platform, allowing the creation of custom forms tailored to any specific data collection needs.',
+    page_about_description: 'The ' + packageJson.name + ' is an innovative and robust solution designed to meet the needs of data collection and management in various contexts. Ideal for organizations, researchers, and professionals who need an effective tool to collect information, the ' + packageJson.name + ' offers an intuitive and flexible platform, allowing the creation of custom forms to meet any specific data collection need.',
     page_about_label_check_for_updates: 'Check for updates',
     page_about_button_check_for_updates: 'Update',
     page_about_label_hosting_site: 'Hosting Site',
@@ -161,6 +178,8 @@ export default {
     page_about_value_authors: ['Mário de Araújo Carvalho'],
     page_about_label_contact_email: 'Contact e-mail',
     page_about_value_contact_email: "mariodearaujocarvalho{'@'}gmail.com",
+    page_about_label_support: 'Partners',
+
     // ---------------------------------------------------------------------------------------------------------------------
 
     // ---------------------------------------------------------------------------------------------------------------------
