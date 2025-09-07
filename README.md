@@ -1,4 +1,4 @@
-# ToFormy
+# ToFormy - Framework for Advanced Applications Designed for Data Collection and Management
 
 ToFormy is an advanced application aimed at collecting and managing data, ideal for any organization or individual that needs a reliable solution for collecting information. Developed as a Progressive Web App (PWA), ToFormy works seamlessly across a variety of devices, offering robust functionality both online and offline.
 
@@ -91,6 +91,24 @@ firebase deploy
 ## License
 
 ToFormy is under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+
+### Citation this framework
+
+```
+@misc{carvalho_toformy_2024,
+  author    = {Mário de Araújo Carvalho},
+  title     = {ToFormy - Framework for Advanced Applications Designed for Data Collection and Management},
+  month     = {mar},
+  year = {2024},
+  note      = {PWA Framework},
+
+	copyright = {MIT},
+	url = {https://github.com/ToFormy/ToFormy},
+	urldate = {2025-09-07},
+	publisher = {GitHub},
+}
+```
 
 ## Contact
 
