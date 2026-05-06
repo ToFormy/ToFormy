@@ -49,7 +49,7 @@ npm install
 npm run dev
 ```
 
-After starting the server, you will be able to access ToFormy at `http://localhost:8080` (or the port indicated in the terminal).
+After starting the server, you will be able to access ToFormy at `http://localhost:3012` (or the port indicated in the terminal).
 
 ## Usage
 
